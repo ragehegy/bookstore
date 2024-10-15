@@ -7,7 +7,11 @@ from utils.renderers import JSONRenderer
 class UsersView(viewsets.ModelViewSet):
     renderer_classes = (JSONRenderer, )
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects
+
+    def get_queryset(self):
+
+        return self.queryset.filter(id=self.kwargs['pk'])
     
     def create(self, request):
         data = request.data
@@ -18,9 +22,13 @@ class UsersView(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def update(self, request, pk, *args, **kwargs):
+        print(pk)
+        return super().update(request, *args, **kwargs)
+
 class ReviewsView(viewsets.ModelViewSet):
     renderer_classes = (JSONRenderer, )
-    serializer_class = ReviewSerializer
+    serializer_class = BookReviewSerializer
     queryset = Review.objects.all()
 
     def create(self, request, pk):
