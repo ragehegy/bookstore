@@ -2,6 +2,13 @@ from rest_framework import serializers
 
 from .models import *
 
+class BookSerializer(serializers.ModelSerializer):
+    reviews = serializers.StringRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Book
+        fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -15,7 +22,9 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(read_only=True, )
+    user_id = serializers.UUIDField(required=True, )
+    book_id = serializers.UUIDField(required=True, )
 
     class Meta:
         model = Review
@@ -24,11 +33,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             'user',
             'content',
             'created',
-            'updated_at'
+            'updated_at',
+            'user_id',
+            'book_id'
         )
-        
-class BookSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Book
-        fields = '__all__'

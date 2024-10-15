@@ -30,6 +30,7 @@ class User(models.Model):
 class Review(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, unique=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='reviews')
+    book = models.ForeignKey(Book, null=True, on_delete=models.SET_NULL, related_name='reviews')
     content = models.CharField(blank=False, max_length=255)
     created = models.DateTimeField(editable=False, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
