@@ -8,8 +8,8 @@ class UsersView(viewsets.ModelViewSet):
     renderer_classes = (JSONRenderer, )
     serializer_class = UserSerializer
     queryset = User.objects.all()
-
-    def post(self, request):
+    
+    def create(self, request):
         data = request.data
 
         serializer = self.serializer_class(data=data)
@@ -23,8 +23,9 @@ class ReviewsView(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
 
-    def post(self, request, book_id):
+    def create(self, request, pk):
         data = request.data
+        data['book_id'] = pk
 
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
@@ -37,7 +38,7 @@ class BooksView(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
-    def post(self, request):
+    def create(self, request):
         data = request.data
 
         serializer = self.serializer_class(data=data)
@@ -45,3 +46,4 @@ class BooksView(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
