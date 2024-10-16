@@ -4,14 +4,14 @@ from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
-    visible = serializers.BooleanField(default=True, read_only=True)
+    is_active = serializers.BooleanField(default=True, read_only=True)
 
     class Meta:
         model = User
         fields = (
             'id',
             'username',
-            'visible',
+            'is_active',
             'created_at',
             'updated_at'
         )
@@ -60,8 +60,9 @@ class BookReviewSerializer(serializers.ModelSerializer):
         )
 
 class BookSerializer(serializers.ModelSerializer):
-    reviews = BookReviewSerializer(many=True, read_only=True)
-
     class Meta:
         model = Book
         fields = '__all__'
+
+class BookDetailsSerializer(BookSerializer):
+    reviews = BookReviewSerializer(many=True, read_only=True)
