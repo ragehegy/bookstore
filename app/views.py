@@ -27,7 +27,7 @@ class ReviewsView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     renderer_classes = (JSONRenderer, )
     serializer_class = BookReviewSerializer
-    queryset = Review.objects.all()
+    queryset = Review.objects.select_related('book')
 
     def create(self, request, pk):
         data = request.data
@@ -43,7 +43,7 @@ class BooksView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     renderer_classes = (JSONRenderer, )
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+    queryset = Book.objects.prefetch_related('reviews')
 
     def create(self, request):
         data = request.data
