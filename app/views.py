@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 from .serializers import *
 from utils.renderers import JSONRenderer
@@ -25,6 +26,7 @@ class UsersView(viewsets.ModelViewSet):
 
 class ReviewsView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    throttle_classes = [UserRateThrottle]
     renderer_classes = (JSONRenderer, )
     serializer_class = BookReviewSerializer
     queryset = Review.objects.select_related('book')
@@ -41,6 +43,7 @@ class ReviewsView(viewsets.ModelViewSet):
 
 class BooksView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    throttle_classes = [AnonRateThrottle]
     renderer_classes = (JSONRenderer, )
     serializer_class = BookSerializer
     queryset = Book.objects.prefetch_related('reviews')
