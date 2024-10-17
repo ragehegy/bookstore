@@ -75,7 +75,6 @@ class LogoutSerializer(serializers.Serializer):
 
 
     def save(self, **kwargs):
-        print(self.data)
         try:
             RefreshToken(self.data['refresh']).blacklist()
         except TokenError:
