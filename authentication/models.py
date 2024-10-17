@@ -61,7 +61,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         return token
 
-    
-    @property
-    def name(self):
-        return self.first_name.title() + " " + self.last_name.title()
+    def __str__(self) -> str:
+        return f"{self.username}"

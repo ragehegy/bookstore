@@ -19,6 +19,9 @@ class Book(models.Model):
              ('view_book_details', 'Can see all details/contents')
         ]
 
+    def __str__(self) -> str:
+        return f'{self.author} - {self.title}'
+
 class Review(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, unique=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='reviews')

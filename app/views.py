@@ -43,7 +43,7 @@ class ReviewsView(viewsets.ModelViewSet):
 
 class BooksView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    throttle_classes = [AnonRateThrottle]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
     renderer_classes = (JSONRenderer, )
     serializer_class = BookSerializer
     queryset = Book.objects.prefetch_related('reviews')
