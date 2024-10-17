@@ -69,7 +69,7 @@ Redocly UI:
     "status_code": 200,
     "data": {
         "id": "dbddac87-080c-4150-976a-90d59bcf0211",
-        "username": "testrageh",
+        "username": <username>,
         "tokens": {
             "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
             "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0..."

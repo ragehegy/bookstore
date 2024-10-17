@@ -71,11 +71,11 @@ class LogoutSerializer(serializers.Serializer):
         self.error_messages = {"bad_token": ("Token is expired or invalid")}
 
         super().__init__(instance, data, **kwargs)
-    refresh = serializers.CharField()
 
+    refresh = serializers.CharField()
 
     def save(self, **kwargs):
         try:
-            RefreshToken(self.data['refresh']).blacklist()
+            RefreshToken(self.data["refresh"]).blacklist()
         except TokenError:
             pass

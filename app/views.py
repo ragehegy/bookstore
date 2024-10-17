@@ -12,7 +12,7 @@ class UsersView(viewsets.ModelViewSet):
     renderer_classes = (JSONRenderer,)
     serializer_class = UserSerializer
     queryset = User.objects
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_queryset(self):
         return self.queryset.filter(id=self.kwargs["pk"])
@@ -43,12 +43,11 @@ class ReviewsView(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
+
     def retrieve(self, request, pk):
         query = self.queryset.filter(book__id=pk)
         serializer = self.get_serializer(query, many=True)
         return Response(serializer.data)
-
 
 
 class BooksView(viewsets.ModelViewSet):
