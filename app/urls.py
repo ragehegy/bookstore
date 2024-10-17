@@ -22,7 +22,7 @@ urlpatterns = [
         "books/<pk>/reviews",
         views.ReviewsView.as_view(
             actions={
-                "get": "list",
+                "get": "retrieve",
                 "post": "create",
             }
         ),
