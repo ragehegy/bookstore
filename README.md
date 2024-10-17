@@ -79,6 +79,15 @@ Redocly UI:
    ```
 - Use the access token in the authorization header in your requests to authorize the user against endpoints that have POST method.
 
+---
+
+# Dockerized container:
+
+- Run `docker compose up --build -d` to start a running container
+- `docker compose logs -f` to view container logs
+
+---
+
 ## Github Actions:
 
 Application goes through a github actions pipelines to validate it's build and test automatically before being able to create a PR and merge from dev branch into main.
