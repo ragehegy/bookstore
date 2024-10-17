@@ -1,11 +1,6 @@
-import datetime
-
-from django.utils import timezone
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-
-from app.models import Book
 
 User = get_user_model()
 
@@ -22,7 +17,8 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
     def test_logged_in_uses_correct_template(self):
         login = self.client.post(
             reverse('login'), 
-            data={'username':'testuser', 'password':'123'})
+            data={'username':'testuser', 'password':'123'}
+        )
         self.assertEqual(login.status_code, 200)
         
         tokens = login.data.get('tokens', None)
@@ -38,5 +34,6 @@ class LoanedBookInstancesByUserListViewTest(TestCase):
                 "author": "Author 1",
                 "date_published": "2024-10-16T23:39:13.325Z"
             },
-            headers=headers)
+            headers=headers
+        )
         self.assertEqual(response.status_code, 201)

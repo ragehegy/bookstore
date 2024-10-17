@@ -1,3 +1,4 @@
+from django.utils.html import strip_tags
 from rest_framework import serializers
 
 from .models import *
@@ -46,6 +47,7 @@ class ReviewUserSerializer(serializers.ModelSerializer):
 
 class BookReviewSerializer(serializers.ModelSerializer):
     user = ReviewUserSerializer(read_only=True)
+    book_id = serializers.UUIDField(write_only=True)
     user_id = serializers.UUIDField(required=True, )
     content = serializers.CharField()
 
@@ -54,10 +56,14 @@ class BookReviewSerializer(serializers.ModelSerializer):
         fields = (
             'user',
             'user_id',
+            'book_id',
             'content',
             'created',
             'updated_at',
         )
+    
+    def validate_content(self, value):
+        return strip_tags(value)
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
