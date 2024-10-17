@@ -10,37 +10,70 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Book',
+            name="Book",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False, unique=True)),
-                ('title', models.CharField(max_length=255, unique=True)),
-                ('author', models.CharField(max_length=255)),
-                ('date_published', models.DateTimeField()),
-                ('created', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, unique=True)),
+                ("author", models.CharField(max_length=255)),
+                ("date_published", models.DateTimeField()),
+                (
+                    "created",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, editable=False
+                    ),
+                ),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'ordering': ['title'],
-                'permissions': [('view_book_details', 'Can see all details/contents')],
+                "ordering": ["title"],
+                "permissions": [("view_book_details", "Can see all details/contents")],
             },
         ),
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False, unique=True)),
-                ('content', models.CharField(max_length=255)),
-                ('created', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('book', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='app.book')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("content", models.CharField(max_length=255)),
+                (
+                    "created",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, editable=False
+                    ),
+                ),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "book",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="reviews",
+                        to="app.book",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['created', 'updated_at'],
-                'permissions': [('write_review', 'Can write and submit a review')],
+                "ordering": ["created", "updated_at"],
+                "permissions": [("write_review", "Can write and submit a review")],
             },
         ),
     ]
