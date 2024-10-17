@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from .models import User
 
+
 class UserSerializer(serializers.Serializer):
     id = serializers.UUIDField(required=False)
     username = serializers.CharField()
@@ -14,7 +15,7 @@ class UserSerializer(serializers.Serializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'token']
+        fields = ["id", "username", "password", "token"]
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
@@ -22,9 +23,9 @@ class UserSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """Performs an update on a User."""
 
-        password = validated_data.pop('password', None)
+        password = validated_data.pop("password", None)
 
-        for (key, value) in validated_data.items():
+        for key, value in validated_data.items():
             setattr(instance, key, value)
 
         if password is not None:
@@ -33,7 +34,7 @@ class UserSerializer(serializers.Serializer):
         instance.save()
 
         return instance
-        
+
 
 class LoginSerializer(serializers.Serializer):
     id = serializers.UUIDField(read_only=True)
@@ -42,45 +43,36 @@ class LoginSerializer(serializers.Serializer):
     tokens = serializers.JSONField(read_only=True)
 
     def get_tokens(self, obj):
-        user = User.objects.get(username=obj['username'])
+        user = User.objects.get(username=obj["username"])
 
-        return {
-            'refresh': user.tokens()['refresh'],
-            'access': user.tokens()['access']
-        }
+        return {"refresh": user.tokens()["refresh"], "access": user.tokens()["access"]}
 
     def validate(self, data):
-        username = data.get('username', None)
-        password = data.get('password', None)
+        username = data.get("username", None)
+        password = data.get("password", None)
 
         user = authenticate(username=username, password=password)
 
         if user is None:
-            raise AuthenticationFailed(
-                'User was not found.'
-            )
+            raise AuthenticationFailed("User was not found.")
 
         if not user.is_active:
-            raise AuthenticationFailed(
-                'This user has been deactivated.'
-            )
+            raise AuthenticationFailed("This user has been deactivated.")
 
         return {
-            'id': user.id,
-            'username': user.username,
-            'tokens': user.tokens,
+            "id": user.id,
+            "username": user.username,
+            "tokens": user.tokens,
         }
-    
+
 
 class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField()
 
-    default_error_message = {
-        'bad_token': ('Token is expired or invalid')
-    }
+    default_error_message = {"bad_token": ("Token is expired or invalid")}
 
     def validate(self, attrs):
-        self.token = attrs['refresh']
+        self.token = attrs["refresh"]
         return attrs
 
     def save(self, **kwargs):
@@ -89,4 +81,4 @@ class LogoutSerializer(serializers.Serializer):
             RefreshToken(self.token).blacklist()
 
         except TokenError:
-            self.fail('bad_token')
+            self.fail("bad_token")

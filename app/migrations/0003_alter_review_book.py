@@ -7,14 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0002_review_user'),
+        ("app", "0002_review_user"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='book',
-            field=models.ForeignKey(default='9f0b0f00-b001-4a02-a564-3e664f3e2b96', on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='app.book'),
+            model_name="review",
+            name="book",
+            field=models.ForeignKey(
+                default="9f0b0f00-b001-4a02-a564-3e664f3e2b96",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="reviews",
+                to="app.book",
+            ),
             preserve_default=False,
         ),
     ]

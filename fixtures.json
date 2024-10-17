@@ -1,0 +1,127 @@
+[
+{
+    "model": "app.book",
+    "pk": "2914366a-dcda-4573-a95f-ff1711bbb537",
+    "fields": {
+        "title": "Book 5",
+        "author": "Author 2",
+        "date_published": "2024-10-16T23:39:13.325Z",
+        "created": "2024-10-16T23:40:03.518Z",
+        "updated_at": "2024-10-16T23:40:03.518Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "7d03395b-8034-445d-a45d-c20df55c7018",
+    "fields": {
+        "title": "Book 7",
+        "author": "Author 1",
+        "date_published": "2024-10-16T23:39:13.325Z",
+        "created": "2024-10-16T23:40:34.789Z",
+        "updated_at": "2024-10-16T23:40:34.789Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "7d061a0d-c0d1-4925-90f3-2d5e8c55346a",
+    "fields": {
+        "title": "Book 3",
+        "author": "Author 3",
+        "date_published": "2024-10-16T23:39:13.325Z",
+        "created": "2024-10-16T23:39:35.027Z",
+        "updated_at": "2024-10-16T23:39:35.028Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "9f0b0f00-b001-4a02-a564-3e664f3e2b96",
+    "fields": {
+        "title": "Test Book",
+        "author": "John Doe",
+        "date_published": "2024-10-15T22:32:20.951Z",
+        "created": "2024-10-15T22:32:35.277Z",
+        "updated_at": "2024-10-15T22:32:35.278Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "a1fc579f-0d20-4b1c-b3c8-57bfe76908a3",
+    "fields": {
+        "title": "Book 6",
+        "author": "Author 2",
+        "date_published": "2024-10-16T23:39:13.325Z",
+        "created": "2024-10-16T23:40:12.378Z",
+        "updated_at": "2024-10-16T23:40:12.379Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "b3abc7d4-f1d8-4c02-8409-ea17f7879035",
+    "fields": {
+        "title": "Book 4",
+        "author": "Author 3",
+        "date_published": "2024-10-16T23:39:13.325Z",
+        "created": "2024-10-16T23:39:52.436Z",
+        "updated_at": "2024-10-16T23:39:52.436Z"
+    }
+},
+{
+    "model": "app.book",
+    "pk": "f7a12aa1-79fb-45f3-bd39-5e33ffeffbcc",
+    "fields": {
+        "title": "string",
+        "author": "string",
+        "date_published": "2024-10-16T00:41:12.257Z",
+        "created": "2024-10-16T00:46:24.180Z",
+        "updated_at": "2024-10-16T00:46:24.180Z"
+    }
+},
+{
+    "model": "app.review",
+    "pk": "0b91b464-14bc-4b3a-8530-afaae9e06685",
+    "fields": {
+        "user": "dbddac87-080c-4150-976a-90d59bcf0211",
+        "book": "9f0b0f00-b001-4a02-a564-3e664f3e2b96",
+        "content": "review<script>alert(\"Intrusion attempt!\")</script>",
+        "created": "2024-10-15T22:34:26.036Z",
+        "updated_at": "2024-10-17T00:43:13.880Z"
+    }
+},
+{
+    "model": "app.review",
+    "pk": "44d71f4b-f4d1-40a6-b2e5-8a7e4a5fb569",
+    "fields": {
+        "user": "dbddac87-080c-4150-976a-90d59bcf0211",
+        "book": "9f0b0f00-b001-4a02-a564-3e664f3e2b96",
+        "content": "reviewalert('Intrusion attempt!')",
+        "created": "2024-10-17T00:53:03.038Z",
+        "updated_at": "2024-10-17T00:53:03.039Z"
+    }
+},
+{
+    "model": "app.review",
+    "pk": "63094492-e098-4978-aee9-0efba3058e9f",
+    "fields": {
+        "user": "dbddac87-080c-4150-976a-90d59bcf0211",
+        "book": "7d061a0d-c0d1-4925-90f3-2d5e8c55346a",
+        "content": "string",
+        "created": "2024-10-17T02:15:09.021Z",
+        "updated_at": "2024-10-17T02:15:09.021Z"
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": "dbddac87-080c-4150-976a-90d59bcf0211",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$4Lc0evIIq8D5zJKHnnnSdQ$7CpQePIYtFi6wuSZtJvK0Jo7rxttdRLgOqAw2/DZXok=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "testrageh",
+        "is_active": true,
+        "created_at": "2024-10-15T22:31:36.039Z",
+        "updated_at": "2024-10-15T23:24:47.758Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

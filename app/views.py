@@ -6,15 +6,16 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from .serializers import *
 from utils.renderers import JSONRenderer
 
+
 class UsersView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
-    renderer_classes = (JSONRenderer, )
+    renderer_classes = (JSONRenderer,)
     serializer_class = UserSerializer
     queryset = User.objects
 
     def get_queryset(self):
-        return self.queryset.filter(id=self.kwargs['pk'])
-    
+        return self.queryset.filter(id=self.kwargs["pk"])
+
     def create(self, request):
         data = request.data
 
@@ -23,17 +24,18 @@ class UsersView(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class ReviewsView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     throttle_classes = [UserRateThrottle]
-    renderer_classes = (JSONRenderer, )
+    renderer_classes = (JSONRenderer,)
     serializer_class = BookReviewSerializer
-    queryset = Review.objects.select_related('book')
+    queryset = Review.objects.select_related("book")
 
     def create(self, request, pk):
         data = request.data
-        data['book_id'] = pk
+        data["book_id"] = pk
 
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
@@ -41,12 +43,13 @@ class ReviewsView(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 class BooksView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     throttle_classes = [UserRateThrottle, AnonRateThrottle]
-    renderer_classes = (JSONRenderer, )
+    renderer_classes = (JSONRenderer,)
     serializer_class = BookSerializer
-    queryset = Book.objects.prefetch_related('reviews')
+    queryset = Book.objects.prefetch_related("reviews")
 
     def create(self, request):
         data = request.data
@@ -56,9 +59,9 @@ class BooksView(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
+
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action == "retrieve":
             return BookDetailsSerializer
         else:
             return BookSerializer
