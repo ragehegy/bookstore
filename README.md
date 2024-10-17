@@ -47,9 +47,9 @@ Visit `http://127.0.0.1:8000/api/schema/swagger-ui/` for full API docs.
 
 ## Other API docs urls:
 
-- Download the API specs yaml format:
+Download the API specs yaml format:
 `http://127.0.0.1:8000/api/schema/` 
-- Redocly UI:
+Redocly UI:
 `http://127.0.0.1:8000/api/schema/redoc`
 
 # How to authenticate:
@@ -79,9 +79,8 @@ Visit `http://127.0.0.1:8000/api/schema/swagger-ui/` for full API docs.
    ```
 - Use the access token in the authorization header in your requests to authorize the user against endpoints that have POST method.
 
----
+## Github Actions:
 
-# Dockerized container:
+Application goes through a github actions pipelines to validate it's build and test automatically before being able to create a PR and merge from dev branch into main.
 
-- Run `docker compose up --build -d` to start a running container
-- `docker compose logs -f` to view container logs
+*check `.github/workflows/django.yml` for full pipeline overview.*
