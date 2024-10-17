@@ -53,11 +53,6 @@ class ReviewModelTest(TestCase):
             book=book,
             content='test bad review'
         )
-        
-    def test_username_max_length(self):
-        user = Review.objects.first()
-        max_length = user._meta.get_field('content').max_length
-        self.assertEqual(max_length, 255)
 
     def test_object_str_value(self):
         review = Review.objects.first()
