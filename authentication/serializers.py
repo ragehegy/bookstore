@@ -8,7 +8,7 @@ from .models import User
 
 
 class UserSerializer(serializers.Serializer):
-    id = serializers.UUIDField(required=False)
+    id = serializers.UUIDField(read_only=True)
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
@@ -67,18 +67,16 @@ class LoginSerializer(serializers.Serializer):
 
 
 class LogoutSerializer(serializers.Serializer):
+    def __init__(self, instance=None, data=..., **kwargs):
+        self.error_messages = {"bad_token": ("Token is expired or invalid")}
+
+        super().__init__(instance, data, **kwargs)
     refresh = serializers.CharField()
 
-    default_error_message = {"bad_token": ("Token is expired or invalid")}
-
-    def validate(self, attrs):
-        self.token = attrs["refresh"]
-        return attrs
 
     def save(self, **kwargs):
-
+        print(self.data)
         try:
-            RefreshToken(self.token).blacklist()
-
+            RefreshToken(self.data['refresh']).blacklist()
         except TokenError:
-            self.fail("bad_token")
+            pass
